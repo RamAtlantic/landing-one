@@ -259,13 +259,13 @@ export default function App() {
 
   return (
     <PopUpProvider>
-      <div className="min-h-screen w-full bg-black text-white relative overflow-hidden font-bebas">
+      <div className="min-h-screen w-full bg-[#010100] text-white relative overflow-hidden font-bebas">
         {/* Navbar - oculto los primeros 2 segundos */}
         <motion.nav
           initial={{ opacity: 0, y: -40 }}
           animate={{ opacity: showHeader ? 1 : 0, y: showHeader ? 0 : -40 }}
           transition={{ duration: 0.7 }}
-          className={`fixed w-full flex justify-center sm:justify-between items-center px-6 md:px-12 py-0 md:py-6 bg-black z-50 border-b-2 border-amber-500/30 ${showHeader ? "pointer-events-auto" : "pointer-events-none"}`}
+          className={`fixed w-full flex justify-center sm:justify-between items-center px-6 md:px-12 py-0 md:py-6 bg-[#010100] z-50 border-b-2 border-amber-500/30 ${showHeader ? "pointer-events-auto" : "pointer-events-none"}`}
           style={{ display: showHeader ? "flex" : "none" }}
         >
           <motion.div className="flex items-center" whileHover={{ scale: 1.05 }}>
@@ -293,7 +293,7 @@ export default function App() {
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            className="text-center px-6 py-20 md:py-32 bg-black flex flex-col items-center justify-center min-h-screen"
+            className="text-center px-6 py-20 md:py-32 bg-[#010100] flex flex-col items-center justify-center min-h-screen"
           >
             <AnimatePresence>
               {showHeader && (
@@ -330,7 +330,7 @@ export default function App() {
           </motion.section>
 
           {/* Why Join? Section - Cards with responsive behavior */}
-          <section className="px-6 py-24 md:py-40 bg-black relative overflow-hidden">
+          <section className="px-6 py-24 md:py-40 bg-[#010100] relative overflow-hidden">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
               {/* Columna izquierda: las 3 cards en vertical con comportamiento responsive */}
               <div className="flex flex-col gap-6 relative">
@@ -353,7 +353,7 @@ export default function App() {
                 ].map((benefit, index) => (
                   <div
                     key={index}
-                    className={`group relative bg-black border-2 border-amber-400/30 rounded-2xl p-6 md:p-8 flex flex-col items-center justify-center text-center shadow-[0_4px_24px_0_rgba(245,158,11,0.10)] transition-all duration-[600ms] ease-in-out
+                    className={`group relative bg-[#010100] border-2 border-amber-400/30 rounded-2xl p-6 md:p-8 flex flex-col items-center justify-center text-center shadow-[0_4px_24px_0_rgba(245,158,11,0.10)] transition-all duration-[600ms] ease-in-out
                       text-white cursor-pointer select-none w-full
                       hover:border-amber-400/50 hover:shadow-[0_0px_80px_0_rgba(245,158,11,0.32)]
                       hover:scale-105 hover:-translate-y-2 active:scale-100
@@ -380,7 +380,7 @@ export default function App() {
 
               {/* Columna derecha: imagen del oso */}
               <div className="flex justify-center items-center h-full">
-                <motion.img
+                <motion.div
                   initial={isMobile ? { opacity: 0, scale: 0.8 } : { opacity: 0, scale: 0.8, x: 200 }}
                   whileInView={{ opacity: 1, scale: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
@@ -392,16 +392,30 @@ export default function App() {
                     stiffness: 80,
                     damping: 20,
                   }}
-                  src="https://moneymaker-phi.vercel.app/oso-cool.png"
-                  alt="Oso Cool"
-                  className="object-contain max-h-[100vh] max-w-3xl mx-auto rounded-2xl shadow-2xl"
-                />
+                  className="object-contain max-h-[100vh] max-w-3xl mx-auto rounded-2xl shadow-2xl w-full flex justify-center items-center relative px-5"
+                >
+                  <video
+                    src="/video.mov"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-auto rounded-2xl shadow-2xl object-contain"
+                  />
+                  {/* Overlay difuminado */}
+                  <div
+                    className="absolute inset-0 rounded-2xl pointer-events-none"
+                    style={{
+                      background: "radial-gradient(circle, rgba(0,0,0,0) 25%, rgba(0,0,0,0.8) 60%, #000 100%)"
+                    }}
+                  />
+                </motion.div>
               </div>
             </div>
           </section>
 
           {/* CTA Section */}
-          <section className="px-6 py-24 md:py-40 bg-black">
+          <section className="px-6 py-24 md:py-40 bg-[#010100]">
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-center mb-20 text-white tracking-wide">
               ¿LISTO PARA COMENZAR?
             </h2>
@@ -427,7 +441,7 @@ export default function App() {
         </main>
 
         {/* Footer */}
-        <footer className="bg-black border-t-2 border-amber-500/20 py-12 px-6">
+        <footer className="bg-[#010100] border-t-2 border-amber-500/20 py-12 px-6">
           <div className="max-w-7xl mx-auto text-center">
             <p className="text-amber-100/60 text-sm">© 2024 Mooney Maker. Todos los derechos reservados.</p>
           </div>
