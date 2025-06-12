@@ -353,11 +353,13 @@ export default function App() {
                 ].map((benefit, index) => (
                   <div
                     key={index}
-                    className={`group relative bg-[#010100] border-2 border-amber-400/30 rounded-2xl p-6 md:p-8 flex flex-col items-center justify-center text-center shadow-[0_4px_24px_0_rgba(245,158,11,0.10)] transition-all duration-[600ms] ease-in-out
+                    className={`group relative bg-[#010100] border-2 border-amber-400/30 rounded-2xl p-6 md:p-8 flex flex-col items-center justify-center text-center
                       text-white cursor-pointer select-none w-full
-                      hover:border-amber-400/50 hover:shadow-[0_0px_80px_0_rgba(245,158,11,0.32)]
-                      hover:scale-105 hover:-translate-y-2 active:scale-100
+                      hover:border-amber-400/50
+                      hover:scale-105 active:scale-100
                       lg:transform lg:-translate-x-[20%] lg:hover:translate-x-0
+                      transition-all duration-300 ease-out
+                      max-lg:transform-none max-lg:hover:transform-none
                     `}
                     style={{ transformOrigin: 'left center' }}
                   >
