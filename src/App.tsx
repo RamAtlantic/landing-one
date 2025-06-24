@@ -10,7 +10,7 @@ import LoadingButton from "./components/LoadingButton"
 import MockBonusPage from "./pages/MockBonusPage"
 import { LuCircleDashed } from "react-icons/lu"
 
-const REGISTER_URL = "https://sportsbet.bet.ar/registrarse?utm_source=publi1lauguty&utm_brandaffiliate=publi1lauguty"
+const REGISTER_URL = "https://mooneymaker.co/?ref=63901"
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
