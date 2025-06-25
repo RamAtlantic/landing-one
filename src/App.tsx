@@ -163,8 +163,8 @@ export default function App() {
         console.warn('No se pudo enviar el evento a Meta');
       }
       
-   /*    // Redirigir al usuario a la URL de registro
-      window.location.href = REGISTER_URL; */
+      // Redirigir al usuario a la URL de registro
+      window.location.href = REGISTER_URL;
     } catch (error) {
       console.error('Error en el proceso de registro:', error);
       // Aún redirigir al usuario aunque falle el evento
