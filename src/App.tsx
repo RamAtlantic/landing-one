@@ -1,17 +1,15 @@
 "use client"
 
-import React, { useState, useRef, createContext, useContext, type ReactNode, useEffect } from "react"
+import React, { useState, createContext, useContext, type ReactNode, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { GiLaurels } from "react-icons/gi"
-import { MdChevronLeft, MdChevronRight } from "react-icons/md"
 import { FaGift, FaRegIdCard } from "react-icons/fa"
 import { TermsAndConditions } from "./components/TermsAndConditions"
-import LoadingButton from "./components/LoadingButton"
 import MockBonusPage from "./pages/MockBonusPage"
 import { LuCircleDashed } from "react-icons/lu"
 import { sendMetaEvent } from "./services/metaEventService"
 
-const REGISTER_URL = "https://mooneymaker.co/?ref=63901"
+const REGISTER_URL = import.meta.env.VITE_REGISTER_URL
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -29,51 +27,6 @@ const staggerContainer = {
   },
 }
 
-// Nuevos colores y estilos
-const goldGradient = "bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-400"
-const darkGold = "text-amber-600"
-const lightGold = "text-amber-300"
-const goldBorder = "border-amber-500/20"
-const goldHover = "hover:bg-amber-500 hover:text-black"
-
-// Testimonial Data - Actualizado con nuevos testimonios y formato
-const testimonials = [
-  {
-    name: "Carlos",
-    age: 32,
-    location: "Buenos Aires",
-    quote: "La experiencia premium superó todas mis expectativas. Los beneficios son realmente exclusivos.",
-    rating: 5,
-  },
-  {
-    name: "Valentina",
-    age: 28,
-    location: "Córdoba",
-    quote: "Me encantó la atención personalizada y las recompensas especiales. ¡Totalmente recomendado!",
-    rating: 5,
-  },
-  {
-    name: "Martín",
-    age: 35,
-    location: "Mendoza",
-    quote: "La plataforma es increíblemente intuitiva y los bonos son generosos. Una experiencia única.",
-    rating: 5,
-  },
-  {
-    name: "Lucía",
-    age: 30,
-    location: "Rosario",
-    quote: "Los eventos exclusivos y la comunidad son lo mejor. ¡Me siento parte de algo especial!",
-    rating: 5,
-  },
-  {
-    name: "Facundo",
-    age: 27,
-    location: "Tucumán",
-    quote: "La atención al cliente es excepcional y los beneficios VIP son realmente impresionantes.",
-    rating: 5,
-  },
-]
 
 interface PopUpContextType {
   isOpen: boolean

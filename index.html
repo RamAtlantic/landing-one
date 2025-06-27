@@ -68,7 +68,7 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '655580480425216');
+    fbq('init', import.meta.env.VITE_META_PIXEL_ID || '655580480425216');
     fbq('track', 'PageView');
     </script>
     <!-- End Meta Pixel Code -->
