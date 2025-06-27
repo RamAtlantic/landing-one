@@ -154,12 +154,14 @@ export default function App() {
               className="h-20 md:h-24"
             /> */}
           </motion.div>
-          <div className="flex items-center space-x-6 md:space-x-8">
+          <div className="flex items-center space-x-4 md:space-x-8 py-2">
             <button
               onClick={handleRegistration}
-              className="text-lg text-white md:text-xl px-8 py-3 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full hover:from-amber-600 hover:to-amber-700 transition-all duration-300 flex items-center"
+              className="text-sm text-white md:text-xl px-4 py-2 md:px-8 md:py-3 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full hover:from-amber-600 hover:to-amber-700 transition-all duration-300 flex items-center"
             >
-              <LuCircleDashed className="text-2xl md:text-3xl mr-3" /> Registrarme YA
+              <LuCircleDashed className="text-lg md:text-3xl mr-2 md:mr-3" /> 
+              <span className="hidden sm:inline">Registrarme YA</span>
+              <span className="sm:hidden">Registrarme</span>
             </button>
           </div>
         </motion.nav>
