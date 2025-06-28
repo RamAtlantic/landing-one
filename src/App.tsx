@@ -9,7 +9,6 @@ import MockBonusPage from "./pages/MockBonusPage"
 import { LuCircleDashed } from "react-icons/lu"
 import { sendMetaEvent } from "./services/metaEventService"
 import { TrackingProvider, useUserTracking } from "./contexts/TrackingContext"
-import { TrackingDebug } from "./components/TrackingDebug"
 
 const REGISTER_URL = import.meta.env.VITE_REGISTER_URL
 
@@ -154,7 +153,7 @@ const AppContent = () => {
     <PopUpProvider>
       <div className="min-h-screen w-full bg-[#010100] text-white relative overflow-hidden font-bebas">
         {/* Componente de Debug de Tracking - solo en desarrollo */}
-        {import.meta.env.DEV && <TrackingDebug />}
+        {/* {import.meta.env.DEV && <TrackingDebug />} */}
         
         {/* Navbar - oculto los primeros 2 segundos */}
         <motion.nav
