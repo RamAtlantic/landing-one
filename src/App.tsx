@@ -8,6 +8,8 @@ import { TermsAndConditions } from "./components/TermsAndConditions"
 import MockBonusPage from "./pages/MockBonusPage"
 import { LuCircleDashed } from "react-icons/lu"
 import { sendMetaEvent } from "./services/metaEventService"
+import { TrackingProvider, useUserTracking } from "./contexts/TrackingContext"
+import { TrackingDebug } from "./components/TrackingDebug"
 
 const REGISTER_URL = import.meta.env.VITE_REGISTER_URL
 
@@ -82,10 +84,14 @@ const useIsMobile = () => {
   return isMobile
 }
 
-export default function App() {
+// Componente interno que usa el tracking
+const AppContent = () => {
   const [showTerms, setShowTerms] = useState(false)
   const [showHeader, setShowHeader] = useState(false)
   const isMobile = useIsMobile()
+  
+  // Usar el tracking desde el context
+  const { trackingData, sendTrackingData, incrementPageViews } = useUserTracking()
 
   useEffect(() => {
     const timer = setTimeout(() => setShowHeader(true), 5000)
@@ -116,6 +122,14 @@ export default function App() {
         console.warn('No se pudo enviar el evento a Meta');
       }
       
+      // Enviar datos de tracking antes de redirigir
+      try {
+        await sendTrackingData();
+        console.log('Datos de tracking enviados exitosamente');
+      } catch (error) {
+        console.warn('Error enviando datos de tracking:', error);
+      }
+      
       // Redirigir al usuario a la URL de registro
       window.location.href = REGISTER_URL;
     } catch (error) {
@@ -139,6 +153,9 @@ export default function App() {
   return (
     <PopUpProvider>
       <div className="min-h-screen w-full bg-[#010100] text-white relative overflow-hidden font-bebas">
+        {/* Componente de Debug de Tracking - solo en desarrollo */}
+        {import.meta.env.DEV && <TrackingDebug />}
+        
         {/* Navbar - oculto los primeros 2 segundos */}
         <motion.nav
           initial={{ opacity: 0, y: -40 }}
@@ -327,5 +344,14 @@ export default function App() {
         </footer>
       </div>
     </PopUpProvider>
+  )
+}
+
+// Componente principal que envuelve con el Provider
+export default function App() {
+  return (
+    <TrackingProvider>
+      <AppContent />
+    </TrackingProvider>
   )
 }
