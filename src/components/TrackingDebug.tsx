@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useUserTracking } from '../contexts/TrackingContext'
 
 export const TrackingDebug: React.FC = () => {
-  const { trackingData, sendTrackingData, getSessionId, getEvents } = useUserTracking()
+  const { trackingData, sendTrackingData, getSessionId, getVisitUid, getEvents } = useUserTracking()
   const [isVisible, setIsVisible] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -52,6 +52,7 @@ export const TrackingDebug: React.FC = () => {
           <h3 className="text-lg font-bold mb-4">Información del Usuario</h3>
           {trackingData ? (
             <div className="space-y-2 text-sm">
+              <div><strong>Visit UID:</strong> {trackingData.visitUid}</div>
               <div><strong>Session ID:</strong> {trackingData.sessionId}</div>
               <div><strong>User Agent:</strong> {trackingData.userAgent.substring(0, 50)}...</div>
               <div><strong>Plataforma:</strong> {trackingData.platform}</div>

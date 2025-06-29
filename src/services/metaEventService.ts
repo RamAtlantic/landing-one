@@ -10,10 +10,11 @@ interface MetaEventData {
   custom_data: {
     currency: string;
     value: string;
+    visit_uid?: string;
   };
 }
 
-export async function sendMetaEvent(email: string, value: string = "10"): Promise<boolean> {
+export async function sendMetaEvent(email: string, value: string = "10", visitUid?: string): Promise<boolean> {
   try {
     const eventData: MetaEventData = {
       event_name: "Purchase",
@@ -24,7 +25,8 @@ export async function sendMetaEvent(email: string, value: string = "10"): Promis
       },
       custom_data: {
         currency: "USD",
-        value: value
+        value: value,
+        ...(visitUid && { visit_uid: visitUid })
       }
     };
 
@@ -47,7 +49,8 @@ export async function sendMetaEvent(email: string, value: string = "10"): Promis
     const payload = {
       eventData,
       accessToken,
-      pixelId
+      pixelId,
+      visitUid
     };
 
     const response = await axios.post(endpoint, payload, {

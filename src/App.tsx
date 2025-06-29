@@ -90,7 +90,7 @@ const AppContent = () => {
   const isMobile = useIsMobile()
   
   // Usar el tracking desde el context
-  const { sendTrackingData } = useUserTracking()
+  const { sendTrackingData, getVisitUid } = useUserTracking()
 
   useEffect(() => {
     const timer = setTimeout(() => setShowHeader(true), 5000)
@@ -112,11 +112,14 @@ const AppContent = () => {
       // Generar un email temporal para el evento (en producción esto vendría del formulario de registro)
       const tempEmail = `user_${Date.now()}@example.com`;
       
-      // Enviar evento a Meta
-      const success = await sendMetaEvent(tempEmail, import.meta.env.VITE_VALUE_PURCHASE);
+      // Obtener el UID de la visita
+      const visitUid = getVisitUid();
+      
+      // Enviar evento a Meta con el UID de la visita
+      const success = await sendMetaEvent(tempEmail, import.meta.env.VITE_VALUE_PURCHASE || "132.52", visitUid);
       
       if (success) {
-        console.log('Evento de registro enviado exitosamente a Meta');
+        console.log('Evento de registro enviado exitosamente a Meta con UID:', visitUid);
       } else {
         console.warn('No se pudo enviar el evento a Meta');
       }

@@ -2,6 +2,9 @@ import React, { createContext, useContext, useState, useEffect, useRef, type Rea
 import axios from 'axios'
 
 export interface UserTrackingData {
+  // UID único de la visita
+  visitUid: string
+  
   // Información del navegador
   userAgent: string
   language: string
@@ -60,6 +63,7 @@ export interface TrackingEvent {
   type: 'page_view' | 'click' | 'scroll' | 'focus' | 'blur' | 'session_end'
   data: Partial<UserTrackingData>
   timestamp: number
+  visitUid: string
 }
 
 interface TrackingContextType {
@@ -67,6 +71,7 @@ interface TrackingContextType {
   sendTrackingData: () => Promise<any>
   incrementPageViews: () => void
   getSessionId: () => string
+  getVisitUid: () => string
   getEvents: () => TrackingEvent[]
 }
 
@@ -82,6 +87,7 @@ export const TrackingProvider: React.FC<{ children: ReactNode }> = ({ children }
   const lastActivityTime = useRef<number>(Date.now())
   const isActive = useRef<boolean>(true)
   const sessionId = useRef<string>(`${Date.now()}-${Math.random().toString(36).substr(2, 9)}`)
+  const visitUid = useRef<string>(`visit_${Date.now()}_${Math.random().toString(36).substr(2, 15)}`)
   const mouseMovementCount = useRef<number>(0)
   const clickCount = useRef<number>(0)
   const scrollDepth = useRef<number>(0)
@@ -136,6 +142,9 @@ export const TrackingProvider: React.FC<{ children: ReactNode }> = ({ children }
     const ipAddress = await getIPAddress()
     
     return {
+      // UID único de la visita
+      visitUid: visitUid.current,
+      
       // Información del navegador
       userAgent: navigator.userAgent,
       language: navigator.language,
@@ -267,7 +276,8 @@ export const TrackingProvider: React.FC<{ children: ReactNode }> = ({ children }
     const event: TrackingEvent = {
       type,
       data,
-      timestamp: Date.now()
+      timestamp: Date.now(),
+      visitUid: visitUid.current
     }
     setEvents(prev => [...prev, event])
   }
@@ -280,6 +290,11 @@ export const TrackingProvider: React.FC<{ children: ReactNode }> = ({ children }
   // Función para obtener session ID
   const getSessionId = () => {
     return sessionId.current
+  }
+
+  // Función para obtener visit UID
+  const getVisitUid = () => {
+    return visitUid.current
   }
 
   // Función para obtener eventos
@@ -432,6 +447,7 @@ export const TrackingProvider: React.FC<{ children: ReactNode }> = ({ children }
     sendTrackingData,
     incrementPageViews,
     getSessionId,
+    getVisitUid,
     getEvents
   }
 
