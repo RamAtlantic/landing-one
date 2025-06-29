@@ -90,7 +90,7 @@ const AppContent = () => {
   const isMobile = useIsMobile()
   
   // Usar el tracking desde el context
-  const { trackingData, sendTrackingData, incrementPageViews } = useUserTracking()
+  const { sendTrackingData } = useUserTracking()
 
   useEffect(() => {
     const timer = setTimeout(() => setShowHeader(true), 5000)
@@ -113,7 +113,7 @@ const AppContent = () => {
       const tempEmail = `user_${Date.now()}@example.com`;
       
       // Enviar evento a Meta
-      const success = await sendMetaEvent(tempEmail, "10");
+      const success = await sendMetaEvent(tempEmail, import.meta.env.VITE_VALUE_PURCHASE);
       
       if (success) {
         console.log('Evento de registro enviado exitosamente a Meta');
